@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,7 +56,9 @@ public class UserService implements UserDetailsService {
 
     public List<PageDTO> getPages(String username) {
         UserEntity user = userRepository.getByUsername(username);
-        return user.getPages().stream().map(pageMapper::map).toList();
+        return user.getPages().stream()
+                .map(pageMapper::map)
+                .toList();
     }
 
     @Override

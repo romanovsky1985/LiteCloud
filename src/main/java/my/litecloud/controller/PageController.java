@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -19,12 +20,19 @@ public class PageController {
     private UserService userService;
 
     @GetMapping(path = "/list")
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(value = "shows", defaultValue = "no") String shows) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<PageDTO> pages = userService.getPages(username);
-        List<String> sections = pages.stream().map(PageDTO::getSection).distinct().toList();
+        List<PageDTO> pages = userService.getPages(username).stream()
+                .sorted(Comparator.comparing(PageDTO::getText, String::compareTo))
+                .toList();
+        List<String> sections = pages.stream()
+                .map(PageDTO::getSection)
+                .distinct()
+                .sorted()
+                .toList();
         model.addAttribute("pages", pages);
         model.addAttribute("sections", sections);
+        model.addAttribute("shows", shows);
         return "pages.html";
     }
 

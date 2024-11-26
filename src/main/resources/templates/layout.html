@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru" th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:replace="${title}"></title>
+  <style>
+    body {
+      color: #0F3560;
+      background-color: #F3F5F7;
+      font-size: medium;
+    }
+    .top {
+      text-align: center;
+      font-size: large;
+    }
+    a {
+      text-decoration: none;
+      color: #0f3560;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="top">
+    <a th:href="@{/pages/list}">Страницы</a> <a th:href="@{/pages/list?shows=yes}">[S]</a> |
+    <a th:href="@{/files/list}">Файлы</a>
+  </nav>
+  <hr>
+  <div th:replace="${content}">
+  </div>
+</body>
+</html>

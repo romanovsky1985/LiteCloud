@@ -1,29 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}">
 <head>
-    <meta charset="UTF-8">
     <title>LiteCloud - Страницы</title>
-    <style>
-        body {
-            color: #0F3560;
-            background-color: #F3F5F7;
-            font-size: medium;
-        }
-        .background-light {
-            background-color: #E3E5E7;
-        }
-        .background-dark {
-            background-color: #D3D5D7;
-        }
-    </style>
 </head>
 <body>
-
-    <hr>
+    <section>
     <table>
         <tr th:each="section, iterStat : ${sections}">
+            <th:block th:if="${shows} == 'yes'">
             <td th:utext="'<b>' + ${section} + '</b>'"></td>
             <td> | </td>
+            </th:block>
             <td>
                 <th:block th:each="page : ${pages}" th:if="${page.section} == ${section}">
                     <a th:href="${page.link}" th:text="${page.text}" target="_blank"></a>
@@ -46,5 +33,6 @@
         <button type="submit">Добавить</button>
     </form>
     <hr>
+    </section>
 </body>
 </html>
