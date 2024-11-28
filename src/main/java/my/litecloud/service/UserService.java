@@ -33,6 +33,9 @@ public class UserService implements UserDetailsService {
     private EntityManager entityManager;
 
     public void createUser(String username, String password) {
+        if (userRepository.findByUsername(username).isPresent()) {
+            return;
+        }
         UserEntity user = new UserEntity();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));

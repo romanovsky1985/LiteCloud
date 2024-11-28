@@ -3,6 +3,7 @@ package my.litecloud.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "pages")
 public class PageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
