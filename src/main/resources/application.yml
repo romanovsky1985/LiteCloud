@@ -1,2 +1,8 @@
+server:
+  port: 3113
 spring:
   application: LiteCloud
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/litecloud"
+    username: litecloud
+    password: litecloud
