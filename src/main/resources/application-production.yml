@@ -1,0 +1,6 @@
+#-Dspring-boot.profiles=development
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/litecloud"
+    username: litecloud
+    password: litecloud

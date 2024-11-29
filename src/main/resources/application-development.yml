@@ -1,0 +1,10 @@
+server:
+  port: 3113
+
+spring:
+  datasource:
+    url: "jdbc:h2:mem:litecloud"
+    username: litecloud
+    password: litecloud
+  jpa:
+    show-sql: true

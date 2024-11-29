@@ -6,7 +6,13 @@ public class PageDTO {
     private String link;
     private String section;
 
+    public PageDTO() {}
 
+    public PageDTO(String section, String text, String link) {
+        this.section = section;
+        this.text = text;
+        this.link = link;
+    }
 
     public Long getId() {
         return id;
