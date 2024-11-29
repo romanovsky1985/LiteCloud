@@ -13,14 +13,14 @@
             </th:block>
             <td>
                 <th:block th:each="page : ${pages}" th:if="${page.section} == ${section}">
-                    <a th:href="${page.link}" th:text="${page.text}" target="_blank"></a>
+                    <a th:href="@{${page.link}}" th:text="${page.text}" target="_blank"></a>
                     <a th:href="@{'/pages/delete?id=' + ${page.id}}">[x]</a> &nbsp; &nbsp;
                 </th:block>
             </td>
         </tr>
     </table>
     <hr>
-    <form method="POST" action="/pages/create">
+    <form method="POST" th:action="@{/pages/create}">
         <label>Раздел:
             <input type="text" name="section">
         </label>

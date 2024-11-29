@@ -16,6 +16,7 @@ public class PageEntity {
     private String section;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserEntity owner;
 
 

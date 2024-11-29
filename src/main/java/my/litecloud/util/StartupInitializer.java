@@ -13,6 +13,6 @@ public class StartupInitializer implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
-        userService.createUser("anton", "7391");
+        userService.createUser("anton", "5557720");
     }
 }
