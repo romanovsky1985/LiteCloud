@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html th:replace="~{layout :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>LiteCloud - Файлы</title>
+</head>
+<body>
+<section>
+    <table>
+        <tr th:each="file : ${files}">
+            <td th:text="${file.text}"></td>
+            <td th:text="${file.size}"></td>
+            <td th:with="id = '?id=' + ${file.id}">
+                <a th:href="@{'/files/' + (${file.shared} ? 'shared' : 'download') + '?id=' + ${file.id}}">download</a>
+                <a th:href="@{'/files/delete?id=' + ${file.id}}">delete</a>
+                <a th:href="@{'/files/update?shared=' + (${file.shared} ? 'false' : 'true') + '&id=' + ${file.id}}">
+                    <span th:text="${file.shared} ? 'unshare' : 'share'">share</span>
+                </a>
+
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <form method="POST" enctype="multipart/form-data" th:action="@{/files/upload}">
+        <label>Название:
+            <input type="text" name="name">
+        </label>
+        <input type="file" name="file">
+        <button type="submit">Добавить</button>
+    </form>
+    <hr>
+</section>
+</body>
+</html>

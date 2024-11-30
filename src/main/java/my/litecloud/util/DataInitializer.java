@@ -1,5 +1,6 @@
 package my.litecloud.util;
 
+import my.litecloud.dto.FileCreateDTO;
 import my.litecloud.dto.PageDTO;
 import my.litecloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,11 @@ public class DataInitializer implements ApplicationRunner {
         userService.createUser("anton", "5557720");
         userService.appendPage("anton",
                 new PageDTO("Поиск", "Гугл", "https://google.com"));
+
+        FileCreateDTO fileCreateDTO = new FileCreateDTO();
+        fileCreateDTO.setText("file.txt");
+        fileCreateDTO.setName("real-long-file-name.txt");
+        fileCreateDTO.setData("File Content".getBytes());
+        userService.appendFile("anton", fileCreateDTO);
     }
 }

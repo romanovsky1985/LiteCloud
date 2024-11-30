@@ -23,8 +23,11 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "owner")
     private List<PageEntity> pages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner")
+    private List<FileEntity> files = new ArrayList<>();
 
 
 
@@ -87,5 +90,12 @@ public class UserEntity implements UserDetails {
         this.pages = pages;
     }
 
+    public List<FileEntity> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<FileEntity> files) {
+        this.files = files;
+    }
 
 }
