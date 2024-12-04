@@ -1,4 +1,3 @@
-#-Dspring-boot.profiles=development
 server:
   port: 3113
 spring:

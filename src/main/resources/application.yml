@@ -2,5 +2,5 @@
 spring:
   application: LiteCloud
   profiles:
-    active: development
+    active: production
 

@@ -17,6 +17,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,7 @@ public class FileController {
     public String list(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<FileReadDTO> files = userService.getFiles(username).stream()
+                .sorted(Comparator.comparing(FileReadDTO::getUpDateTime, LocalDateTime::compareTo))
                 .toList();
         model.addAttribute("files", files);
         return "files.html";

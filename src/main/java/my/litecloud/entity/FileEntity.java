@@ -2,6 +2,8 @@ package my.litecloud.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "files")
 public class FileEntity {
@@ -16,6 +18,8 @@ public class FileEntity {
     private Integer size;
 
     private Boolean shared;
+
+    private LocalDateTime upDateTime;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -81,5 +85,13 @@ public class FileEntity {
 
     public void setOwner(UserEntity owner) {
         this.owner = owner;
+    }
+
+    public LocalDateTime getUpDateTime() {
+        return upDateTime;
+    }
+
+    public void setUpDateTime(LocalDateTime upDateTime) {
+        this.upDateTime = upDateTime;
     }
 }

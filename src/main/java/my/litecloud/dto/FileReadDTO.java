@@ -1,10 +1,13 @@
 package my.litecloud.dto;
 
+import java.time.LocalDateTime;
+
 public class FileReadDTO {
     private Long id;
     private String text;
     private Integer size;
     private Boolean shared;
+    private LocalDateTime upDateTime;
 
 
 
@@ -29,7 +32,9 @@ public class FileReadDTO {
     }
 
     public String getInfo() {
-        return String.format("Up: 2024/12/12   Kb: %d", size / 1024 + 1);
+        return String.format("Up: %4d/%02d/%02d   Kb: %d",
+                upDateTime.getYear(), upDateTime.getMonthValue(), upDateTime.getDayOfMonth(),
+                size / 1024 + 1);
     }
 
     public void setSize(Integer size) {
@@ -42,5 +47,13 @@ public class FileReadDTO {
 
     public void setShared(Boolean shared) {
         this.shared = shared;
+    }
+
+    public LocalDateTime getUpDateTime() {
+        return upDateTime;
+    }
+
+    public void setUpDateTime(LocalDateTime upDateTime) {
+        this.upDateTime = upDateTime;
     }
 }
