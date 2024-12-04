@@ -19,9 +19,9 @@ public class FileEntity {
 
     private Boolean shared;
 
+    @Column(name = "up_datetime")
     private LocalDateTime upDateTime;
 
-    @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] data;
 

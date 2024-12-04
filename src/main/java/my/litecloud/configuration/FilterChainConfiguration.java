@@ -18,7 +18,7 @@ public class FilterChainConfiguration {
             throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/pages/**").authenticated()
                         .anyRequest().permitAll()
