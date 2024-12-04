@@ -27,5 +27,9 @@ public class DataInitializer implements ApplicationRunner {
         fileCreateDTO.setName("real-long-file-name.txt");
         fileCreateDTO.setData("File Content".getBytes());
         userService.appendFile("anton", fileCreateDTO);
+        fileCreateDTO.setText("Записки охотника (txt)");
+        fileCreateDTO.setName("book.txt");
+        fileCreateDTO.setData("Несколько слов ".repeat(1000).getBytes());
+        userService.appendFile("anton", fileCreateDTO);
     }
 }

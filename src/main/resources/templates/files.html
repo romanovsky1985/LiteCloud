@@ -5,24 +5,23 @@
 </head>
 <body>
 <section>
-    <table>
+    <table width="100%">
         <tr th:each="file : ${files}">
-            <td th:text="${file.text}"></td>
-            <td th:text="${file.size}"></td>
-            <td th:with="id = '?id=' + ${file.id}">
-                <a th:href="@{'/files/' + (${file.shared} ? 'shared' : 'download') + '?id=' + ${file.id}}">download</a>
-                <a th:href="@{'/files/delete?id=' + ${file.id}}">delete</a>
+            <td th:text="${file.text}" width="50%"></td>
+            <td th:text="${file.info}" width="20%"></td>
+            <td width="30%">
+                <a th:href="@{'/files/' + (${file.shared} ? 'shared' : 'download') + '?id=' + ${file.id}}">Download</a> |
+                <a th:href="@{'/files/delete?id=' + ${file.id}}">Delete</a> |
                 <a th:href="@{'/files/update?shared=' + (${file.shared} ? 'false' : 'true') + '&id=' + ${file.id}}">
-                    <span th:text="${file.shared} ? 'unshare' : 'share'">share</span>
+                    <span th:text="${file.shared} ? 'Unshare' : 'Share'">share</span>
                 </a>
-
             </td>
         </tr>
     </table>
     <hr>
     <form method="POST" enctype="multipart/form-data" th:action="@{/files/upload}">
         <label>Название:
-            <input type="text" name="name">
+            <input type="text" name="text">
         </label>
         <input type="file" name="file">
         <button type="submit">Добавить</button>

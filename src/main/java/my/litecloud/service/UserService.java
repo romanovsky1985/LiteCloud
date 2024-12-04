@@ -117,4 +117,36 @@ public class UserService implements UserDetailsService {
         fileRepository.save(file);
     }
 
+    public String getFileName(String username, Long id) {
+        FileEntity file = fileRepository.getById(id);
+        if (!Objects.equals(file.getOwner().getUsername(), username)) {
+            throw new RuntimeException("permission denied");
+        }
+        return file.getName();
+    }
+
+    public String getFileName(Long id) {
+        FileEntity file = fileRepository.getById(id);
+        if (!file.getShared()) {
+            throw new RuntimeException("permission denied");
+        }
+        return file.getName();
+    }
+
+    public byte[] getFileData(String username, Long id) {
+        FileEntity file = fileRepository.getById(id);
+        if (!Objects.equals(file.getOwner().getUsername(), username)) {
+            throw new RuntimeException("permission denied");
+        }
+        return file.getData();
+    }
+
+    public byte[] getFileData(Long id) {
+        FileEntity file = fileRepository.getById(id);
+        if (!file.getShared()) {
+            throw new RuntimeException("permission denied");
+        }
+        return file.getData();
+    }
+
 }

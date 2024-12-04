@@ -28,6 +28,10 @@ public class FileReadDTO {
         return size;
     }
 
+    public String getInfo() {
+        return String.format("Up: 2024/12/12   Kb: %d", size / 1024 + 1);
+    }
+
     public void setSize(Integer size) {
         this.size = size;
     }

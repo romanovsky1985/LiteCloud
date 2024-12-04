@@ -1,15 +1,22 @@
 package my.litecloud.controller;
 
 import my.litecloud.dto.FileReadDTO;
+import my.litecloud.dto.FileCreateDTO;
 import my.litecloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -31,7 +38,44 @@ public class FileController {
     public String update(@RequestParam("id") Long id, @RequestParam("shared") Boolean shared) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.shareFile(username, id, shared);
-        System.out.println("set share " + shared);
+        return "redirect:/files/list";
+    }
+
+    @GetMapping(path = "/delete")
+    public String delete(@RequestParam("id") Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.deleteFile(username, id);
+        return "redirect:/files/list";
+    }
+
+    @GetMapping(path = "/download")
+    public ResponseEntity<byte[]> download(@RequestParam("id") Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String filename = userService.getFileName(username, id);
+        byte[] data = userService.getFileData(username, id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .body(data);
+    }
+
+    @GetMapping(path = "/shared")
+    public ResponseEntity<byte[]> sharedDownload(@RequestParam("id") Long id) {
+        String filename = userService.getFileName(id);
+        byte[] data = userService.getFileData(id);
+        return ResponseEntity.ok()
+                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                 .body(data);
+    }
+
+    @PostMapping(path = "/upload")
+    public String upload(@RequestParam("file") MultipartFile file, FileCreateDTO createDTO) 
+            throws IOException {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        createDTO.setName(file.getOriginalFilename());
+        createDTO.setData(file.getBytes());
+        userService.appendFile(username, createDTO);
         return "redirect:/files/list";
     }
 
