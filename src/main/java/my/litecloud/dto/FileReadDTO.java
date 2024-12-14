@@ -7,6 +7,7 @@ public class FileReadDTO {
     private String text;
     private Integer size;
     private Boolean shared;
+    private Boolean editable;
     private LocalDateTime upDateTime;
 
 
@@ -55,5 +56,13 @@ public class FileReadDTO {
 
     public void setUpDateTime(LocalDateTime upDateTime) {
         this.upDateTime = upDateTime;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
 }

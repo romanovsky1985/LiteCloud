@@ -4,7 +4,7 @@ public class FileCreateDTO {
     private String text;
     private String name;
     private byte[] data;
-
+    private boolean editable;
 
 
     public String getText() {
@@ -29,5 +29,13 @@ public class FileCreateDTO {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 }

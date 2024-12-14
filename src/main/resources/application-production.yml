@@ -4,3 +4,6 @@ spring:
     url: "jdbc:postgresql://localhost:5432/litecloud"
     username: litecloud
     password: litecloud
+  servlet:
+    multipart:
+      max-file-size: 100MB

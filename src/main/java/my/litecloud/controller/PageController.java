@@ -19,6 +19,27 @@ public class PageController {
     @Autowired
     private UserService userService;
 
+    @GetMapping(path = "/username")
+    public String usersUsername() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return "redirect:/pages/user?username=" + username;
+    }
+
+    @GetMapping(path = "/user")
+    public String usersList(Model model, @RequestParam(value = "username") String username) {
+        List<PageDTO> pages = userService.getPages(username).stream()
+                .sorted(Comparator.comparing(PageDTO::getText, String::compareTo))
+                .toList();
+        List<String> sections = pages.stream()
+                .map(PageDTO::getSection)
+                .distinct()
+                .sorted()
+                .toList();
+        model.addAttribute("sections", sections);
+        model.addAttribute("pages", pages);
+        return "pages.html";
+    }
+
     @GetMapping(path = "/list")
     public String list(Model model, @RequestParam(value = "shows", defaultValue = "no") String shows) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

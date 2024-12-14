@@ -19,6 +19,8 @@ public class FileEntity {
 
     private Boolean shared;
 
+    private Boolean editable;
+
     @Column(name = "up_datetime")
     private LocalDateTime upDateTime;
 
@@ -93,5 +95,13 @@ public class FileEntity {
 
     public void setUpDateTime(LocalDateTime upDateTime) {
         this.upDateTime = upDateTime;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
 }

@@ -2,6 +2,7 @@ package my.litecloud.controller;
 
 import my.litecloud.dto.FileReadDTO;
 import my.litecloud.dto.FileCreateDTO;
+import my.litecloud.page.files.EditPage;
 import my.litecloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -80,6 +81,15 @@ public class FileController {
         createDTO.setData(file.getBytes());
         userService.appendFile(username, createDTO);
         return "redirect:/files/list";
+    }
+
+    @GetMapping(path = "/edit")
+    public String edit(Model model, @RequestParam("id") Long id) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        EditPage page = new EditPage();
+        page.setContent(new String(userService.getFileData(username, id)));
+        model.addAttribute("page", page);
+        return "/files/edit.html";
     }
 
 }

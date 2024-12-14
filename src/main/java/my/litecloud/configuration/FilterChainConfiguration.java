@@ -18,13 +18,11 @@ public class FilterChainConfiguration {
             throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                // .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/pages/**").authenticated()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/pages/user").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
-               // .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .build();
     }
 }

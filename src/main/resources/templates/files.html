@@ -9,6 +9,9 @@
         <tr th:each="file : ${files}">
             <td th:text="${file.text}" width="50%"></td>
             <td th:text="${file.info}" width="20%"></td>
+            <td width="10%">
+                <a th:if="${file.editable}" th:href="@{'/files/edit?id=' + ${file.id}}">Edit</a>
+            </td>
             <td width="30%">
                 <a th:href="@{'/files/' + (${file.shared} ? 'shared' : 'download') + '?id=' + ${file.id}}">Download</a> |
                 <a th:href="@{'/files/delete?id=' + ${file.id}}">Delete</a> |
@@ -24,6 +27,9 @@
             <input type="text" name="text">
         </label>
         <input type="file" name="file">
+        <label> Редактируемый
+            <input type="checkbox" name="editable">
+        </label>
         <button type="submit">Добавить</button>
     </form>
     <hr>
